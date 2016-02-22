@@ -1,2 +1,2 @@
 # Proyectos-LM
-XML y JSON
+Se utilizaran un fichero XML y otro JSON consultados por un programa sobre Python.
