@@ -16,13 +16,30 @@ else:
     raiz = xml_completo.getroot()
 
 #Listar información: Muestra los diferentes Autores/Grupos que contiene.
+
 print "En el fichero se encuentran los siguientes grupos: "
-lista_autores = raiz.findall("autor")
-for autor in lista_autores:
+
+for autor in raiz.findall("autor"):
     print "Grupo:", autor.text
 
-print "Se han encontrado", len(lista_autores),"grupos"
+print "Se han encontrado", len(raiz.findall("autor")),"grupos"
+
 #Contar información: Muestra cuantos albunes tiene cada grupo.
+
+dic_autores = {}
+for autor in raiz.findall("autor"):
+    dic_autores[autor.text] = 0
+    if type(autor.getchildren()) == list:
+        for album in autor.getchildren():
+                dic_autores[autor.text] = dic_autores[autor.text] + 1
+    else:
+        dic_autores[autor.text] = 1
+
+for grupo in dic_autores.items():
+    if grupo[1] >1:
+        print "El grupo:", grupo[0][:-9], "posee", grupo[1], "albunes"
+    else:
+        print "El grupo:", grupo[0][:-9], "posee", grupo[1], "album"
 
 #Buscar o filtrar información: Si se introduce un autor muestra sus albunes, si introduce un album se muestra sus canciones.
 
