@@ -42,6 +42,18 @@ for grupo in dic_autores.items():
         print "El grupo:", grupo[0][:-9], "posee", grupo[1], "album"
 
 #Buscar o filtrar información: Si se introduce un autor muestra sus albunes, si introduce un album se muestra sus canciones.
+print ""
+album_autor = raw_input("Introduce un autor o album: ")
+
+for grupo in raiz.findall("autor"):
+    if grupo.text.strip() == album_autor:
+        for album in grupo.getchildren():
+            print "Album:",album.text
+
+for album in raiz.findall("autor/album"):
+    if album.text.strip() == album_autor:
+        print "El autor del album es: ",album.getparent().text
+
 
 #Buscar información relacionada: Si se introduce una canción, se muestra el album y su autor.
 
