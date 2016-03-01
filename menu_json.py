@@ -45,5 +45,22 @@ for arma in raiz["weapons"]:
         print "Daño:", arma["damage"]
 
 #Buscar información relacionada: Si se introduce el nombre de un arma, se muestra sus especificaciones.
+print ""
+
+print "Recuerda que las armas son las siguientes:"
+for arma in raiz["weapons"]:
+    print arma["name"]
+
+print ""
+nombre_arma = raw_input("Introduce el nombre del arma: ")
+for arma in raiz["weapons"]:
+    if arma["name"].lower() == nombre_arma.lower():
+        print "Nombre:", arma["name"]
+        print "Tipo:", arma["type"]
+        print "Precio:", arma["price"]
+        print "Daño:", arma["damage"]
+        print "Tamaño del cargador:", arma["clip_size"]
+        print "Retroceso:", arma["recoil_magnitude"]
+
 
 #Ejercicio libre: Muestra el arma que permite al jugador ir más rápido y el arma que más daño resta.
