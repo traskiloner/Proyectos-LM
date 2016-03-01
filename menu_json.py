@@ -65,24 +65,21 @@ for arma in raiz["weapons"]:
 
 #Ejercicio libre: Muestra el arma que permite al jugador ir más rápido y el arma que más daño resta.
 print ""
-arma_rapida_valor = 0
-arma_rapida_nombre = ""
-arma_damage_valor = 0
-arma_damage_nombre = ""
-relacion_valor = 0
-relacion_nombre = ""
+dic_libre = {"nombre_damage":"","valor_damage":0,"nombre_rapida":"","valor_rapida":0,"nombre_relacion":"","valor_relacion":0}
 
 for arma in raiz["weapons"]:
-    if arma["damage"] >= arma_damage_valor:
-        arma_damage_valor = arma["damage"]
-        arma_damage_nombre = arma["name"]
-    if arma["max_player_speed"] >= arma_rapida_valor:
-        arma_rapida_valor = arma["max_player_speed"]
-        arma_rapida_nombre = arma["name"]
-    if (arma["max_player_speed"] / arma["damage"]) >= relacion_valor:
-        relacion_valor = (arma["max_player_speed"] / arma["damage"])
-        relacion_nombre = arma["name"]
+    if arma["damage"] >= dic_libre["valor_damage"]:
+        dic_libre["valor_damage"] = arma["damage"]
+        dic_libre["nombre_damage"] = arma["name"]
 
-print "El arma más rapida es:", arma_rapida_nombre
-print "El arma que realiza más daño es: ", arma_damage_nombre
-print "El arma con la relación velocidad/daño más alta es:", relacion_nombre
+    if arma["max_player_speed"] >= dic_libre["valor_rapida"]:
+        dic_libre["valor_rapida"] = arma["max_player_speed"]
+        dic_libre["nombre_rapida"] = arma["name"]
+
+    if (arma["max_player_speed"] / arma["damage"]) >= dic_libre["valor_relacion"]:
+        dic_libre["valor_relacion"] = (arma["max_player_speed"] / arma["damage"])
+        dic_libre["nombre_relacion"] = arma["name"]
+
+print "El arma más rapida es:", dic_libre["nombre_rapida"]
+print "El arma que realiza más daño es: ", dic_libre["nombre_damage"]
+print "El arma con la relación velocidad/daño más alta es:", dic_libre["nombre_relacion"]
