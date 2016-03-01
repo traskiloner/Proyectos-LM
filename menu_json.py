@@ -64,3 +64,25 @@ for arma in raiz["weapons"]:
 
 
 #Ejercicio libre: Muestra el arma que permite al jugador ir más rápido y el arma que más daño resta.
+print ""
+arma_rapida_valor = 0
+arma_rapida_nombre = ""
+arma_damage_valor = 0
+arma_damage_nombre = ""
+relacion_valor = 0
+relacion_nombre = ""
+
+for arma in raiz["weapons"]:
+    if arma["damage"] >= arma_damage_valor:
+        arma_damage_valor = arma["damage"]
+        arma_damage_nombre = arma["name"]
+    if arma["max_player_speed"] >= arma_rapida_valor:
+        arma_rapida_valor = arma["max_player_speed"]
+        arma_rapida_nombre = arma["name"]
+    if (arma["max_player_speed"] / arma["damage"]) >= relacion_valor:
+        relacion_valor = (arma["max_player_speed"] / arma["damage"])
+        relacion_nombre = arma["name"]
+
+print "El arma más rapida es:", arma_rapida_nombre
+print "El arma que realiza más daño es: ", arma_damage_nombre
+print "El arma con la relación velocidad/daño más alta es:", relacion_nombre
