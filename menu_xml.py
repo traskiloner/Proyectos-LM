@@ -22,8 +22,7 @@ print "En el fichero se encuentran los siguientes grupos: "
 for autor in raiz.findall("autor"):
     print "Grupo:", autor.text
 
-print "Se han encontrado", len(raiz.findall("autor")),"grupos"
-
+print "Se han encontrado", len(raiz.findall("autor")),"grupos" , len(raiz.findall("autor/album")),"albunes y", len(raiz.findall("autor/album/cancion")), "canciones"
 #Contar información: Muestra cuantos albunes tiene cada grupo.
 
 dic_autores = {}
@@ -44,18 +43,37 @@ for grupo in dic_autores.items():
 #Buscar o filtrar información: Si se introduce un autor muestra sus albunes, si introduce un album se muestra sus canciones.
 print ""
 album_autor = raw_input("Introduce un autor o album: ")
+encontrado = False
 
 for grupo in raiz.findall("autor"):
-    if grupo.text.strip() == album_autor:
+    if grupo.text.strip().lower() == album_autor.lower() and encontrado is False:
         for album in grupo.getchildren():
             print "Album:",album.text
+            encontrado = True
 
-for album in raiz.findall("autor/album"):
-    if album.text.strip() == album_autor:
-        print "El autor del album es: ",album.getparent().text
-
+if encontrado is True:
+    for album in raiz.findall("autor/album"):
+        if album.text.strip().lower() == album_autor.lower():
+            print "El autor del album es: ",album.getparent().text
+            encontrado = True
+else:
+    print "No se ha encontrado album o autor"
 
 #Buscar información relacionada: Si se introduce una canción, se muestra el album y su autor.
+print ""
+
+nombre_cancion = raw_input("Introduce el nombre de una cancion: ")
+encontrado = False
+
+for cancion in raiz.findall("autor/album/cancion"):
+    if cancion.text.lower() == nombre_cancion.lower() and encontrado is False:
+        print "Cancion encontrada:", cancion.text
+        print "Album:", cancion.getparent().text
+        print "Autor:", cancion.getparent().getparent().text
+        encontrado = True
+
+if encontrado is False:
+    print "Canción no encontrada"
 
 #Ejercicio libre: Si se introduce un grupo, se muestra toda su discografia y los enlaces a cada uno de sus albunes.
 
