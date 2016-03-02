@@ -76,5 +76,20 @@ if encontrado is False:
     print "Canción no encontrada"
 
 #Ejercicio libre: Si se introduce un grupo, se muestra toda su discografia y los enlaces a cada uno de sus albunes.
+print ""
 
+nombre_grupo = raw_input("Introduce un grupo: ")
+encontrado = False
+for autor in raiz.findall("autor"):
+    if autor.text.strip().lower() == nombre_grupo.lower() and encontrado is False:
+        print "Grupo:", autor.text
+        for album in autor.getchildren():
+            print "Album:", album.text.strip()
+            for url in album.getchildren():
+                if url.text.startswith("http"):
+                    print "URL", url.text
+                    print ""
+        encontrado = True
 
+if encontrado is False:
+    print "No se ha encontrado el grupo"
