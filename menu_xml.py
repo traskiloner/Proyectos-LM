@@ -21,6 +21,7 @@ else:
     print "Introduce 3 para buscar los albunes de un grupo o sus canciones"
     print "Introduce 4 para buscar información sobre una canción"
     print "Introduce 5 para obtener las URLs de la discografia de un grupo"
+    print "Introduce 6 para generar un fichero HTML"
     opcion = raw_input("Opción: ")
 
 
@@ -113,3 +114,24 @@ else:
 
         if encontrado is False:
             print "No se ha encontrado el grupo"
+
+    if opcion in locals().values() and opcion == "6":
+        anyo = raw_input("Introduce un año: ")
+        encontrado = False
+        fichero_html = open('musica.html',"w")
+        for album in raiz.findall("autor/album"):
+            if album.attrib.values()[0] == anyo:
+
+                autor = "<h1>" + album.getparent().text[:-9] + "</h1>"
+                disco = "<p>" + album.text[:-13] + "</p>"
+                #imagen = album.find("url_imagen").text
+                url_torrent = '<a href="' + album.find("url_torrent").text + '">' + 'Descargar torrent</a>'
+
+                encontrado = True
+
+                fichero_html.write(autor)
+                fichero_html.write(disco)
+                fichero_html.write(url_torrent)
+
+        if encontrado is False:
+            print "No se ha encontrado ningún album en", anyo
