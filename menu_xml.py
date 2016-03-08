@@ -124,14 +124,17 @@ else:
 
                 autor = "<h1>" + album.getparent().text[:-9] + "</h1>"
                 disco = "<p>" + album.text[:-13] + "</p>"
-                #imagen = album.find("url_imagen").text
+                imagen = '<img src="' + album.find("url_imagen").text + '" width=20%>'
                 url_torrent = '<a href="' + album.find("url_torrent").text + '">' + 'Descargar torrent</a>'
 
                 encontrado = True
 
+                fichero_html.write(imagen)
                 fichero_html.write(autor)
                 fichero_html.write(disco)
                 fichero_html.write(url_torrent)
+                fichero_html.write('</br>')
+                fichero_html.write('\n')
 
         if encontrado is False:
             print "No se ha encontrado ningún album en", anyo
