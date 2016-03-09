@@ -83,3 +83,16 @@ for arma in raiz["weapons"]:
 print "El arma más rapida es:", dic_libre["nombre_rapida"]
 print "El arma que realiza más daño es: ", dic_libre["nombre_damage"]
 print "El arma con la relación velocidad/daño más alta es:", dic_libre["nombre_relacion"]
+
+#Ejercicio añadido: genera fichero html
+fichero_html = open("armas.html","w")
+
+for arma in raiz["weapons"]:
+    nombre_arma = '<h1>' + arma["name"] + '</h1>'
+    fichero_html.write(nombre_arma)
+
+    tipo_arma = '<p>' + arma["type"] + '</p>'
+    fichero_html.write(tipo_arma)
+
+    modelo_arma = '<a href="' + arma["model_world"] + '">Modelo</a>'
+    fichero_html.write(modelo_arma)
